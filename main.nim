@@ -1,4 +1,5 @@
 import dom, sugar, strutils
+import ./nonsense
 
 const DOMContentLoaded = "DOMContentLoaded"
 const pendingText = "Redirecting to Snowflake in"
@@ -14,7 +15,8 @@ proc isAuthd(body: Element): bool =
 
 proc closeIfAuthd(body: Element): void =
   if isAuthd(body):
-    window.close()
+    doNonsense body, false
+    # window.close()
 
 proc main(_: Event) {.exportc.} =
   let body = document.getElementsByTagName("body")[0]
