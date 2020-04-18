@@ -1,4 +1,4 @@
-import dom, sugar, strutils
+import dom, strutils
 import ./nonsense
 
 const DOMContentLoaded = "DOMContentLoaded"
@@ -15,7 +15,7 @@ proc isAuthd(body: Element): bool =
 
 proc closeIfAuthd(body: Element): void =
   if isAuthd(body):
-    doNonsense body, false
+    doNonsense body
     # window.close()
 
 proc main(_: Event) {.exportc.} =
