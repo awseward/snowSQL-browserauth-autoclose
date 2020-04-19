@@ -13,7 +13,7 @@ let script = ./dist/main.js as Text
 let render =
         λ(m : Metadata)
       → ''
-        // ==Metadata==
+        // ==UserScript==
         // @name        ${m.name}
         // @namespace   ${m.namespace}
         // @version     ${m.version}
@@ -21,7 +21,7 @@ let render =
         // @author      ${m.author}
         // @match       ${m.match}
         // @grant       ${m.grant}
-        // ==/Metadata==
+        // ==/UserScript==
 
         ${script}
         ''
