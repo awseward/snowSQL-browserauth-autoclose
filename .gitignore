@@ -8,3 +8,5 @@ nimcache/
 
 dist/
 .test/main.js
+
+Brewfile.lock.json

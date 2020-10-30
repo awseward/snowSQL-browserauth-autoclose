@@ -5,6 +5,7 @@ userscript to close tabs left behind by SnowSQL's OAuth redirect.
 
 ## Setup
 ```
+brew bundle install
 asdf install
 ```
 
