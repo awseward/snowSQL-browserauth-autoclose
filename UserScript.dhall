@@ -11,8 +11,8 @@ let Metadata =
 let script = ./dist/main.js as Text
 
 let render =
-        λ(m : Metadata)
-      → ''
+      λ(m : Metadata) →
+        ''
         // ==UserScript==
         // @name        ${m.name}
         // @namespace   ${m.namespace}
