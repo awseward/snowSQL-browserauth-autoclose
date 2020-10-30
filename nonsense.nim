@@ -1,4 +1,4 @@
-import dom, sugar, strutils
+import dom
 
 proc setBgImage(body: Element) =
   body.style.setProperty "background-image",      "url('https://media.giphy.com/media/3EiNpweH34XGoQcq9Q/giphy.gif')";
