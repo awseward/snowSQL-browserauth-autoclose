@@ -6,7 +6,7 @@ import ./nonsense
 
 const
   DOMContentLoaded = "DOMContentLoaded"
-  pendingText      = "Redirecting to Snowflake in"
+  pendingText      = "Redirecting to Snowflake client in"
   successText      = "Your identity was confirmed and propagated to Snowflake SnowSQL."
   enableNonsense   = true
 
