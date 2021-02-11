@@ -6,14 +6,13 @@ import ./nonsense
 
 const
   DOMContentLoaded = "DOMContentLoaded"
-  pendingText      = "Redirecting to Snowflake client in"
-  successText      = "Your identity was confirmed and propagated to Snowflake SnowSQL."
+  pendingText      = "Redirecting to Snowflake"
+  successText      = "identity was confirmed and propagated"
   enableNonsense   = true
 
-var checkAuthdIntvl : ref Interval
+var checkAuthdIntvl: ref Interval
 
 proc getText(body: Element): string =
-  # $ body.getElementsByTagName("pre")[0].innerText
   $ body.getElementsByTagName("pre")[0].textContent
 
 proc isSnowflakeAuthCallback(body: Element): bool =
@@ -32,8 +31,10 @@ proc closeIfAuthd(body: Element): void =
       discard setTimeout(close, 2000)
     else: close()
 
+proc getBody(): Element = document.getElementsByTagName("body")[0]
+
 proc main(_: Event) {.exportc.} =
-  let body = document.getElementsByTagName("body")[0]
+  let body = getBody()
   if (isSnowflakeAuthCallback body) or (isAuthd body):
     checkAuthdIntvl = window.setInterval(() => closeIfAuthd(body), 100)
 
