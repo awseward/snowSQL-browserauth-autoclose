@@ -6,7 +6,7 @@ import ./nonsense
 
 const
   DOMContentLoaded = "DOMContentLoaded"
-  pendingText      = "Redirecting to Snowflake in"
+  pendingText      = "Redirecting to Snowflake client in"
   successText      = "Your identity was confirmed and propagated to Snowflake SnowSQL."
   enableNonsense   = true
 
@@ -34,7 +34,7 @@ proc closeIfAuthd(body: Element): void =
 
 proc main(_: Event) {.exportc.} =
   let body = document.getElementsByTagName("body")[0]
-  if (isSnowflakeAuthCallback body):
+  if (isSnowflakeAuthCallback body) or (isAuthd body):
     checkAuthdIntvl = window.setInterval(() => closeIfAuthd(body), 100)
 
 document.addEventlistener(DOMContentLoaded, main)
