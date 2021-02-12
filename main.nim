@@ -6,36 +6,31 @@ import ./nonsense
 
 const
   DOMContentLoaded = "DOMContentLoaded"
-  pendingText      = "Redirecting to Snowflake"
-  successText      = "identity was confirmed and propagated"
-  enableNonsense   = true
+  pendingText = "Redirecting to Snowflake"
+  successText = "identity was confirmed and propagated"
+  nonsenseEnable = true
+  nonsenseLengthMs = 2000
 
 var checkAuthdIntvl: ref Interval
 
-proc getText(body: Element): string =
-  $ body.getElementsByTagName("pre")[0].textContent
+proc getText(): string = $ document.body.textContent
 
-proc isSnowflakeAuthCallback(body: Element): bool =
-  getText(body).contains pendingText
+proc isSnowflakeAuthCallback(): bool = getText().contains pendingText
 
-proc isAuthd(body: Element): bool =
-  getText(body).contains successText
+proc isAuthd(): bool = getText().contains successText
 
 proc close() = window.close
 
-proc closeIfAuthd(body: Element): void =
-  if isAuthd(body):
+proc closeIfAuthd(): void =
+  if isAuthd():
     window.clearInterval checkAuthdIntvl
-    if enableNonsense:
-      doNonsense body, enabled = enableNonsense
-      discard setTimeout(close, 2000)
+    if nonsenseEnable:
+      doNonsense document
+      discard setTimeout(close, nonsenseLengthMs)
     else: close()
 
-proc getBody(): Element = document.getElementsByTagName("body")[0]
-
 proc main(_: Event) {.exportc.} =
-  let body = getBody()
-  if (isSnowflakeAuthCallback body) or (isAuthd body):
-    checkAuthdIntvl = window.setInterval(() => closeIfAuthd(body), 100)
+  if isSnowflakeAuthCallback() or isAuthd():
+    checkAuthdIntvl = window.setInterval(closeIfAuthd, 100)
 
 document.addEventlistener(DOMContentLoaded, main)
