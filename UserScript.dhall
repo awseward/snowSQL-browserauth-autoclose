@@ -8,10 +8,9 @@ let Metadata =
       , grant : Text
       }
 
-let script = ./dist/main.js as Text
-
 let render =
       λ(m : Metadata) →
+      λ(script : Text) →
         ''
         // ==UserScript==
         // @name        ${m.name}
@@ -26,15 +25,14 @@ let render =
         ${script}
         ''
 
-let m
-    : Metadata
-    = { name = "Autoclose snowflake auth window"
-      , namespace = "http://example.com"
-      , version = "0.1"
-      , description = "Does what it says on the tin."
-      , author = "Andrew Seward"
+in  render
+      { name = "Snowflake Browser Oauth Tab Autoclose"
+      , namespace = "…"
+      , version = "${env:USERSCRIPT_VERSION as Text}"
+      , description =
+          "Cleans up after Snowflake's browser Oauth flow so you don't have a junk tab lying around"
+      , author = "…"
       , match = "http://localhost/*"
       , grant = "window.close"
       }
-
-in  render m
+      ./dist/main.js as Text
