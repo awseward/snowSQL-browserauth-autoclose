@@ -1,6 +1,4 @@
-import
-  dom
-, strutils
+import dom, strutils
 import ./nonsense
 
 const
@@ -18,15 +16,13 @@ proc isSnowflakeAuthCallback(): bool = getText().contains pendingText
 
 proc isAuthd(): bool = getText().contains successText
 
-proc close() = window.close
-
-proc closeIfAuthd(): void =
+proc closeIfAuthd() =
   if isAuthd():
     window.clearInterval checkAuthdIntvl
     if nonsenseEnable:
-      doNonsense document
-      discard setTimeout(close, nonsenseLengthMs)
-    else: close()
+      closeNonsense document, nonsenseLengthMs
+    else:
+      window.close()
 
 proc main(_: Event) {.exportc.} =
   if isSnowflakeAuthCallback() or isAuthd():

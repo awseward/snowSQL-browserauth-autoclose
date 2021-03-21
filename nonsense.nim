@@ -1,14 +1,24 @@
 import dom
+import sugar
+import tables
 
 proc renderUrl(url: string): string = "url('" & url & "')"
 
+const properties = {
+  "background-attachment": "fixed",
+  "background-image": renderUrl("https://media.giphy.com/media/3EiNpweH34XGoQcq9Q/giphy.gif"),
+  "background-position": "center",
+  "background-repeat": "no-repeat",
+  "background-size": "800px 600px"
+}.toTable()
+
 proc setBgImage(body: Element) =
   let style = body.style
-  style.setProperty "background-image", renderUrl "https://media.giphy.com/media/3EiNpweH34XGoQcq9Q/giphy.gif"
-  style.setProperty "background-size", "800px 600px"
-  style.setProperty "background-attachment", "fixed"
-  style.setProperty "background-position", "center"
-  style.setProperty "background-repeat", "no-repeat"
+  for key, val in properties.pairs:
+    style.setProperty(key, val)
 
-proc doNonsense*(document: Document) =
+proc closeNonsense*(document: Document, lengthMs: int) =
   setBgImage document.body
+  # Would be nice to be able to just pass `window.close`, but it doesn't like
+  # that ¯\_(ツ)_/¯
+  discard setTimeout(() => window.close(), lengthMs)
