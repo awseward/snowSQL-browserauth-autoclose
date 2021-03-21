@@ -1,7 +1,6 @@
 import
   dom
 , strutils
-, sugar
 import ./nonsense
 
 const
