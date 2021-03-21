@@ -13,10 +13,10 @@ asdf install
 
 ```sh
 # This will output a Tampermonkey userscript
-./us.sh
+make
 
-# This will output a Tampermonkey userscript with a minified body.
-./us_minified.sh
+# This will output a Tampermonkey userscript without minifying the body.
+make print
 ```
 
 ## Load Userscript into Tampermonkey

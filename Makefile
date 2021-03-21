@@ -16,7 +16,7 @@ print-minified: ${dist_js}
 print: ${dist_js}
 	dhall text < UserScript.dhall
 
-${dist_js}:
+${dist_js}: .FORCE
 	nim js --outdir:${dist_dir} ${nim_main}
 	echo 'main();' >> ${dist_js}
 
